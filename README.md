@@ -1,1 +1,1 @@
-# authorization-service
+# authorization-service-api
