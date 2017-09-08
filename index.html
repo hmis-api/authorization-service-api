@@ -1,0 +1,259 @@
+<!DOCTYPE HTML><html><head><title>HMIS Authorization Service API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 6.4.1"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+      .examples {
+        margin-left: 0.5em;
+      }
+      .resource-modal li > ul {
+        margin-bottom: 1em;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>HMIS Authorization Service API documentation <small>version 1.0.0</small></h1><p>https://www.hmislynk.com/hmis-authorization-service/rest</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="authorize" class="panel-title">Authorization Endpoint</h3></div><div class="panel-body"><div class="top-resource-description"><p>This endpoint is used by the client to obtain authorization from the HMIS user via user-agent (typically a web browser) redirection. It handles active session lookup (via cookie), authenticating the user, and user consent.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_authorize"><span class="parent"></span>/authorize</a> <span class="methods"><a href="#authorize_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_authorize" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#authorize_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>The authorization service validates the request to ensure all required parameters are present and valid. If the request is valid, the authorization service authenticates the Hmis user and obtains an authorization decision/consent (by asking the HMIS user). When a decision is established, the authorization service directs the user-agent to the provided client redirection URI using an HTTP redirection response</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="authorize_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/authorize</h4></div><div class="modal-body"><div class="alert alert-info"><p>The authorization service validates the request to ensure all required parameters are present and valid. If the request is valid, the authorization service authenticates the Hmis user and obtains an authorization decision/consent (by asking the HMIS user). When a decision is established, the authorization service directs the user-agent to the provided client redirection URI using an HTTP redirection response</p></div><ul class="nav nav-tabs"><li class="active"><a href="#authorize_get_request" data-toggle="tab">Request</a></li><li><a href="#authorize_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="authorize_get_request"><h3>Query Parameters</h3><ul><li><strong>response_type</strong>: <em>required (string)</em><p>The value must be one ofcode for requesting an authorization<sctrong>code</sctrong>(authorization code grant flow))<sctrong>token</sctrong>for requesting an access token (implicit grant flow),</p></li><li><strong>trustedApp_id</strong>: <em>required (string)</em><p>Indicates the trustedApp that is making the request. The trustedApp identifier issued to the trustedApp during the client registration process.</p></li><li><strong>redirect_uri</strong>: <em>required (string)</em><p>Determines where the response is sent. The value of this parameter must exactly match one of the values registered during the trustedApp registration process (including the http or https schemes, case, and trailing &#39;/&#39;).</p></li><li><strong>state</strong>: <em>(string)</em><p>An opaque value used by the trustedApp to maintain state between the request and callback. The authorization service includes this value when redirecting the user-agent back to the trustedApp. The parameter should be used for preventing cross-site request forgery.</p></li><li><strong>access_type</strong>: <em>required (string)</em><p>Indicates if the truedApp needs to access a HMIS Client API when the user is not present at the browser. This parameter defaults to <strong>online</strong>. If a trustedApp needs to refresh access tokens when the user is not present at the browser, then use <strong>offline</strong>. This will result in trustedApp obtaining a refresh token the first time the trustedApp exchanges an authorization code for a user. The implicit grant flow does not support <strong>offline<strong>access.</strong></strong></p></li><li><strong>approval_prompt</strong>: <em>required (string)</em><p>Indicates if the user should be re-prompted for consent. The default is <strong>auto<strong>, so a given user should only see the consent page the first time through the sequence. If the value is force, then the user sees a consent page even if they have previously given consent to the trustedApp.</strong></strong></p></li></ul></div><div class="tab-pane" id="authorize_get_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><p>If the Hmis user grants the access request, the authorization service issues an authorization code and delivers it to the client by adding the following parameters to the query component of the redirection URI using the "application/x-www-form-urlencoded" format.</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&amp;state=xyz
+</code></pre></div><h2>HTTP status code <a href="https://httpstatus.es/404" target="_blank">404</a></h2><p>If the request fails due to a missing, invalid, or mismatching redirection URI, or if the client identifier is missing or invalid, the authorization service will inform the HMIS user of the error, and will not automatically redirect the user-agent to the invalid redirection URI. If the HMIS user denies the access request or if the request fails for reasons other than a missing or invalid redirection URI, the authorization service informs the client by adding the following parameters to the query component of the redirection URI using the "application/x-www-form-urlencoded" format:</p><ul><li>invalid_request<ul>The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed.</ul></li><li>unauthorized_trustedApp<ul>The trustedApp is not authorized to request an authorization code using this method.</ul></li><br><li>access_denied<ul>The user or authorization service denied the request.</ul></li><li>unsupported_response_type<ul>The authorization service does not support obtaining an authorization code using this method.</ul></li><li>server_error<ul>The authorization service encountered an unexpected condition which prevented it from fulfilling the request.</ul></li><li>temporarily_unavailable<ul>The authorization service is currently unable to handle the request due to a temporary overloading or maintenance of the server.</ul></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="token" class="panel-title">Token Endpoint</h3></div><div class="panel-body"><div class="top-resource-description"><p>The token endpoint is used by the client to obtain an access token by presenting one of the following: 1) authorization code (obtained thru Authorization Endpoint using the Authorization Code Grant Flow) 2) refresh token The token endpoint is used with every authorization flow except for the implicit grant flow (since an access token is issued directly).</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_token"><span class="parent"></span>/token</a> <span class="methods"><a href="#token_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_token" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#token_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>The client makes a request to the token endpoint by adding the described query parameters using the "application/x-www-form-urlencoded" format in the HTTP request entity-body <strong>The authorization service does the following:</strong><ul><li>Authenticate the client and ensure the authorization code was issued to the authenticated client.</li><li>Verify that the authorization code is valid.</li><li>Ensure that the specified redirect_uri parameter value is same as the redirect_uri parameter value included in the initial authorization request as described in Authorization Code Grant Flow - Authorization Request.</li></ul></p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="token_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/token</h4></div><div class="modal-body"><div class="alert alert-info"><p>The client makes a request to the token endpoint by adding the described query parameters using the "application/x-www-form-urlencoded" format in the HTTP request entity-body <strong>The authorization service does the following:</strong><ul><li>Authenticate the client and ensure the authorization code was issued to the authenticated client.</li><li>Verify that the authorization code is valid.</li><li>Ensure that the specified redirect_uri parameter value is same as the redirect_uri parameter value included in the initial authorization request as described in Authorization Code Grant Flow - Authorization Request.</li></ul></p></div><ul class="nav nav-tabs"><li class="active"><a href="#token_post_request" data-toggle="tab">Request</a></li><li><a href="#token_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="token_post_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>The trustedApp must specify its credentials (i.e. trustedApp id:trustedApp secret issued during trustedApp registration) using HTTP Basic authentication scheme. The trustedApp identifier is used as the username, and the trustedApp secret is used as the password.</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+</code></pre></div></li><li><strong>Accept</strong>: <em>required (string)</em><p><strong>Example</strong>:</p><div class="examples"><pre><code>application/json</code></pre></div></li></ul><h3>Query Parameters</h3><ul><li><strong>grant_type</strong>: <em>required (string)</em><p>As defined in the OAuth 2.0 specification, the value of this parameter must be set to <strong>authorization_code</strong>. (in case of renewing access token by using refresh token this parameter value <strong>refrsh_token</strong>)</p></li><li><strong>code</strong>: <em>required (string)</em><p>The authorization code received in the authorization response.</p></li><li><strong>redirect_uri</strong>: <em>required (string)</em><p>The <strong>redirect_uri</strong> parameter that was included in the authorization request as described in Authorization Code Grant Flow - Authorization Request, and their values MUST be identical.</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[object Object]</code></pre></div></div><div class="tab-pane" id="token_post_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><p>If the access token request is valid and authorized, the authorization service issues an access token and optional refresh token, and constructs the response by adding the following parameters to the entity body of the HTTP response with a 200 (OK) status code</p><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "access_token": "2YotnFZFEjr1zCsicMWpAA",
+  "token_type": "Bearer",
+  "expires_in": 3600,
+  "refresh_token": "tGzv3JOkF0XG5Qx2TlKWIA"
+}</code></pre></div><h2>HTTP status code <a href="https://httpstatus.es/400" target="_blank">400</a></h2><p>The authorization service responds with an HTTP 400 (Bad Request) status code and includes the following parameters with the response<table class="confluenceTable tablesorter"><thead><tr class="sortableHeader"><th class="confluenceTh sortableHeader" data-column="0"><div class="tablesorter-header-inner"><p>Parameter Name</p></div></th><th class="confluenceTh sortableHeader" data-column="1"><div class="tablesorter-header-inner"><p>Description / Parameter Value</p></div></th><th class="confluenceTh sortableHeader" data-column="2"><div class="tablesorter-header-inner"><p>Required?</p></div></th></tr></thead><tbody></tbody></table></p><pre><code> &lt;tr&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; error &lt;/p&gt;&lt;/td&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; A single error code from the following: &lt;br class="atl-forced-newline"&gt;     &lt;strong&gt;invalid_request&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The request is missing a required parameter, includes an unsupported parameter value (other than grant type), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed. &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;invalid_client&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; Client authentication failed (e.g. unknown client, no client authentication included, or unsupported authentication method). &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;invalid_grant&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The provided authorization grant (e.g. authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. This error code is also returned if the account is disabled. &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;unauthorized_client&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The authenticated client is not authorized to use this authorization grant type. &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;unsupported_grant_type&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The authorization grant type is not supported by the authorization service. &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;server_error&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The authorization service encountered an unexpected condition which prevented it from fulfilling the request. &lt;br class="atl-forced-newline"&gt; &lt;strong&gt;temporarily_unavailable&lt;/strong&gt; &lt;br class="atl-forced-newline"&gt; The authorization service is currently unable to handle the request due to a temporary overloading or maintenance of the server. &lt;/p&gt;&lt;/td&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; Yes &lt;/p&gt;&lt;/td&gt; 
+ &lt;/tr&gt; 
+ &lt;tr&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; error_description &lt;/p&gt;&lt;/td&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; A human-readable UTF-8 encoded text providing additional information, used to assist the client developer in understanding the error that occurred. &lt;/p&gt;&lt;/td&gt; 
+  &lt;td class="confluenceTd"&gt;&lt;p&gt; No &lt;/p&gt;&lt;/td&gt; 
+ &lt;/tr&gt; 
+&lt;/tbody&gt;&lt;/table&gt;
+</code></pre><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": "invalid_request"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="revoke" class="panel-title">Revocation Request</h3></div><div class="panel-body"><div class="top-resource-description"><p>The revocation endpoint is used by the client to revoke one of the following tokens: 1) access token 2) refresh token - (i.e. refresh token and all related access tokens) 3) consent token - (i.e. consent token and all related refresh tokens and access tokens) Developers may use this feature when configuring a Log Out button in their application.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_revoke"><span class="parent"></span>/revoke</a> <span class="methods"><a href="#revoke_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_revoke" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#revoke_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>The revocation endpoint is used by the client to revoke one of the following tokens: 1) access token 2) refresh token - (i.e. refresh token and all related access tokens) 3) consent token - (i.e. consent token and all related refresh tokens and access tokens) Developers may use this feature when configuring a Log Out button in their application.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="revoke_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/revoke</h4></div><div class="modal-body"><div class="alert alert-info"><p>The revocation endpoint is used by the client to revoke one of the following tokens: 1) access token 2) refresh token - (i.e. refresh token and all related access tokens) 3) consent token - (i.e. consent token and all related refresh tokens and access tokens) Developers may use this feature when configuring a Log Out button in their application.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#revoke_post_request" data-toggle="tab">Request</a></li><li><a href="#revoke_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="revoke_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>revoking an access token : 
+    access_token=SplxlOBeZQQYbYS6WxSbIA
+revoking a refresh token) : 
+   refresh_token=khgfkagasgurnjg434
+revoking a consent token
+   consent_token=GLKfkfnafan349dljl
+</code></pre></div></div><div class="tab-pane" id="revoke_post_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>revoking an access token : 
+   { "access_token"="SplxlOBeZQQYbYS6WxSbIA" }
+revoking a refresh token) : 
+   {"refresh_token"="khgfkagasgurnjg434" }
+revoking a consent token
+   { "consent_token"="GLKfkfnafan349dljl" }
+</code></pre></div><h2>HTTP status code <a href="https://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": "invalid_request"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="clients" class="panel-title">/clients</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_clients__clientid__consentmessages"><span class="parent">/clients/{clientId}</span>/consentmessages</a> <span class="methods"><a href="#clients__clientid__consentmessages_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_clients__clientid__consentmessages" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#clients__clientid__consentmessages_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets a list of consent messages for the specified client.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="clients__clientid__consentmessages_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/clients/{clientId}</span>/consentmessages</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets a list of consent messages for the specified client.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#clients__clientid__consentmessages_get_request" data-toggle="tab">Request</a></li><li><a href="#clients__clientid__consentmessages_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="clients__clientid__consentmessages_get_request"><h3>URI Parameters</h3><ul><li><strong>clientId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="clients__clientid__consentmessages_get_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "oAuthMessageGroups": {
+    "oAuthMessageGroup": [
+      {
+        "consentMessage": "Read your basic account information",
+        "detailedConsentMessageExists": "false",
+        "oAuthMessageItems": {
+          "oAuthMessageItem": {
+            "consentMessage": "Read your account id, first name, middle name and last name",
+            "detailedConsentMessageExists": "false"
+          }
+        }
+      },
+      {
+        "consentMessage": "read information associated with your account",
+        "oAuthMessageItems": {
+          "oAuthMessageItem": [
+            {
+              "consentMessage": "Sample consent message",
+              "detailedConsentMessageExists": "false"
+            },
+            {
+              "consentMessage": "sample consent message",
+              "detailedConsentMessageExists": "false"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}</code></pre></div><h2>HTTP status code <a href="https://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "errors": {
+    "error": {
+      "code": "CLIENT_NOT_FOUND",
+      "message": "the specified client is not found"
+    }
+  }
+}</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_clients__clientid__detailedconsentmessages"><span class="parent">/clients/{clientId}</span>/detailedconsentmessages</a> <span class="methods"><a href="#clients__clientid__detailedconsentmessages_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_clients__clientid__detailedconsentmessages" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#clients__clientid__detailedconsentmessages_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Gets a list of detailed consent messages for the specified client.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="clients__clientid__detailedconsentmessages_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/clients/{clientId}</span>/detailedconsentmessages</h4></div><div class="modal-body"><div class="alert alert-info"><p>Gets a list of detailed consent messages for the specified client.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#clients__clientid__detailedconsentmessages_get_request" data-toggle="tab">Request</a></li><li><a href="#clients__clientid__detailedconsentmessages_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="clients__clientid__detailedconsentmessages_get_request"><h3>URI Parameters</h3><ul><li><strong>clientId</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="clients__clientid__detailedconsentmessages_get_response"><h2>HTTP status code <a href="https://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "oAuthMessageGroups": {
+    "oAuthMessageGroup": {
+      "consentMessage": "Consent message for the API",
+      "detailedConsentMessage": "some detailed consent message",
+      "oAuthMessageItems": {
+        "oAuthMessageItem": {
+          "detailedConsentMessage": "This is the detailed consent message"
+        }
+      }
+    }
+  }
+}</code></pre></div><h2>HTTP status code <a href="https://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "errors": {
+    "error": {
+      "code": "CLIENT_NOT_FOUND",
+      "message": "the specified client (trusted App) is not found"
+    }
+  }
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#authorize">Authorization Endpoint</a></li><li><a href="#token">Token Endpoint</a></li><li><a href="#revoke">Revocation Request</a></li><li><a href="#clients">/clients</a></li></ul></div></div></div></div></body></html>
