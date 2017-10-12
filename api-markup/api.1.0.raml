@@ -201,12 +201,12 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
           revoking a consent token
              consent_token=GLKfkfnafan349dljl
         required: false
-/clients:
-  '/{clientId}':
+/trustedapps:
+  '/{trustedappid}':
     /consentmessages:
       displayName: Consent Message
       get:
-        description: Gets a list of consent messages for the specified client.
+        description: Gets a list of consent messages for the specified trusted app.
         responses:
           '200':
             body:
@@ -234,14 +234,14 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
                 example:
                   errors:
                     error:
-                      code: CLIENT_NOT_FOUND
-                      message: the specified client is not found
+                      code: TRUSTEDAPP_NOT_FOUND
+                      message: the specified trusted app is not found
                 required: false
     uriParameters:
-      clientId: {}
+      trustedappid: {}
     /detailedconsentmessages:
       get:
-        description: Gets a list of detailed consent messages for the specified client.
+        description: Gets a list of detailed consent messages for the specified trustedapp.
         responses:
           '200':
             body:
@@ -261,7 +261,7 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
                 example:
                   errors:
                     error:
-                      code: CLIENT_NOT_FOUND
+                      code: TRUSTEDAPP_NOT_FOUND
                       message: the specified client (trusted App) is not found
                 required: false
 
