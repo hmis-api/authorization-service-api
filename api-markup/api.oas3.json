@@ -14,14 +14,7 @@
       "get": {
         "responses": {
           "200": {
-            "description": "If the Hmis user grants the access request, the authorization service issues an authorization code and delivers it to the client by adding the following parameters to the query component of the redirection URI using the \"application/x-www-form-urlencoded\" format.\n",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": "Location https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&state=xyz\n"
-                }
-              }
-            }
+            "description": "If the HMIS user grants the access request, the authorization service issues an authorization code and delivers it to the client by adding the following parameters to the query component of the redirection URI using the \"application/x-www-form-urlencoded\" format.\n"
           },
           "404": {
             "description": "If the request fails due to a missing, invalid, or mismatching redirection URI, or if the client identifier is missing or invalid, the authorization service will inform the HMIS  user of the error, and will not automatically redirect the user-agent to the invalid redirection URI.\nIf the HMIS  user denies the access request or if the request fails for reasons other than a missing or invalid redirection URI, the authorization service informs the client by adding the following parameters to the query component of the redirection URI using the \"application/x-www-form-urlencoded\" format:\n\n  <ul>\n    <li>invalid_request\n      <ul>\n      The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed.\n      </ul>\n    </li>\n    <li>unauthorized_trustedApp\n      <ul>\n      The trustedApp is not authorized to request an authorization code using this method.\n      </ul>\n    </li>\n    <li>access_denied\n      <ul>\n      The user or authorization service denied the request.\n      </ul>\n    </li>\n    <li>unsupported_response_type\n      <ul>\n      The authorization service does not support obtaining an authorization code using this method.\n      </ul>\n    </li>\n    <li>server_error\n      <ul>\n      The authorization service encountered an unexpected condition which prevented it from fulfilling the request.\n      </ul>\n    </li>\n    <li>temporarily_unavailable\n      <ul>\n  The authorization service is currently unable to handle the request due to a temporary overloading or maintenance of the server.    </ul>\n    </li>\n  </ul>\n"
@@ -122,7 +115,7 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "example": "",
+              "example": {},
               "schema": {
                 "type": "string"
               }
@@ -182,14 +175,7 @@
       "post": {
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "example": "revoking an access token :\n   { \"access_token\"=\"SplxlOBeZQQYbYS6WxSbIA\" }\nrevoking a refresh token) :\n   {\"refresh_token\"=\"khgfkagasgurnjg434\" }\nrevoking a consent token\n   { \"consent_token\"=\"GLKfkfnafan349dljl\" }\n"
-                }
-              }
-            }
+            "description": "revoking an access token:\n{ \"access_token\"=\"SplxlOBeZQQYbYS6WxSbIA\" }\nrevoking a refresh token):\n{\"refresh_token\"=\"khgfkagasgurnjg434\" }\nrevoking a consent token:\n{ \"consent_token\"=\"GLKfkfnafan349dljl\" }\n"
           },
           "400": {
             "description": "",
@@ -204,12 +190,11 @@
             }
           }
         },
-        "description": "The revocation endpoint is used by the client to revoke one of the following tokens:\n1) access token\n2) refresh token - (i.e. refresh token and all related access tokens)\n3) consent token - (i.e. consent token and all related refresh tokens and access tokens)\nDevelopers may use this feature when configuring a Log Out button in their application.\n",
+        "description": "The revocation endpoint is used by the client to revoke one of the following tokens:\n1) access token\n2) refresh token - (i.e. refresh token and all related access tokens)\n3) consent token -(i.e. consent token and all related refresh tokens and access tokens)\nDevelopers may use this feature when configuring a Log Out button in their application.\n",
         "operationId": "POST_revoke",
         "requestBody": {
           "content": {
             "application/json": {
-              "example": "revoking an access token :\n    access_token=SplxlOBeZQQYbYS6WxSbIA\nrevoking a refresh token) :\n   refresh_token=khgfkagasgurnjg434\nrevoking a consent token\n   consent_token=GLKfkfnafan349dljl\n",
               "schema": {
                 "type": "string"
               }
