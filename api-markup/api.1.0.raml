@@ -4,7 +4,11 @@ version: 1.0.0
 mediaType: application/json
 protocols:
   - HTTPS
+securedBy: [oauth_2_0]
+securitySchemes:
+  oauth_2_0: !include security-schemes/oauth_2_0.raml
 baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
+
 /authorize:
   displayName: Authorization Endpoint
   description: |
@@ -17,11 +21,11 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
     responses:
       '200':
         description: |
-          If the Hmis user grants the access request, the authorization service issues an authorization code and delivers it to the client by adding the following parameters to the query component of the redirection URI using the "application/x-www-form-urlencoded" format.
+          If the HMIS user grants the access request, the authorization service issues an authorization code and delivers it to the client by adding the following parameters to the query component of the redirection URI using the "application/x-www-form-urlencoded" format.
         body:
           application/json:
-            example: |
-              Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&state=xyz
+            description: |
+              Location https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA&state=xyz
             required: false
       '404':
         description: |
@@ -156,7 +160,7 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
           The <strong>redirect_uri</strong> parameter that was included in the authorization request as described in Authorization Code Grant Flow - Authorization Request, and their values MUST be identical.
     body:
       application/json:
-        example: ''
+        example: '{}'
         required: false
 /revoke:
   displayName: Revocation Request
@@ -171,20 +175,20 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
       The revocation endpoint is used by the client to revoke one of the following tokens:
       1) access token
       2) refresh token - (i.e. refresh token and all related access tokens)
-      3) consent token - (i.e. consent token and all related refresh tokens and access tokens)
+      3) consent token -(i.e. consent token and all related refresh tokens and access tokens)
       Developers may use this feature when configuring a Log Out button in their application.
     responses:
       '200':
         body:
           application/json:
-            example: |
-              revoking an access token :
-                 { "access_token"="SplxlOBeZQQYbYS6WxSbIA" }
-              revoking a refresh token) :
-                 {"refresh_token"="khgfkagasgurnjg434" }
-              revoking a consent token
-                 { "consent_token"="GLKfkfnafan349dljl" }
             required: false
+            description: |
+              revoking an access token:
+              { "access_token"="SplxlOBeZQQYbYS6WxSbIA" }
+              revoking a refresh token):
+              {"refresh_token"="khgfkagasgurnjg434" }
+              revoking a consent token:
+              { "consent_token"="GLKfkfnafan349dljl" }
       '400':
         body:
           application/json:
@@ -193,12 +197,12 @@ baseUri: 'https://www.hmislynk.com/hmis-authorization-service/rest'
             required: false
     body:
       application/json:
-        example: |
+        description: |
           revoking an access token :
               access_token=SplxlOBeZQQYbYS6WxSbIA
           revoking a refresh token) :
              refresh_token=khgfkagasgurnjg434
-          revoking a consent token
+          revoking a consent token :
              consent_token=GLKfkfnafan349dljl
         required: false
 /trustedapps:
