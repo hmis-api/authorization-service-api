@@ -3,7 +3,7 @@ info:
   title: HMIS Authorization Service
   version: 1.0.0
 servers:
-  - url: 'https://www.hmislynk.com/hmis-authorization-service/rest'
+  - url: 'https://www.hslynk.com/hmis-authorization-service/rest'
 paths:
   /authorize:
     get:
