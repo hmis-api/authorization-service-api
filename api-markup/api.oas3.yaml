@@ -2,6 +2,9 @@ openapi: 3.0.0
 info:
   title: HMIS Authorization Service
   version: 1.0.0
+  description: |
+       **Note :**
+              Please note that the partial updates are supported via PUT APIs. However, Note that If "null" value is passed for any element, in the PUT request body, it will be ignored. An empty string value should be sent (instead of "null" value) for the elements that need to be updated with NULL values.
 servers:
   - url: 'https://www.hslynk.com/hmis-authorization-service/rest'
 paths:
@@ -114,7 +117,7 @@ paths:
           in: query
           required: true
           description: >
-            Indicates if the truedApp needs to access a HMIS Client API when the
+            Indicates if the trustedApp needs to access a HMIS Client API when the
             user is not present at the browser.
 
             This parameter defaults to <strong>online</strong>. If a trustedApp
@@ -220,21 +223,22 @@ paths:
           required: true
           description: >
             As defined in the OAuth 2.0 specification, the value of this
-            parameter must be set to  <strong> authorization_code</strong>. (in
+            parameter must be set to  <strong> authorization_code</strong>. In
             case of renewing access token by using refresh token this parameter
-            value <strong>refrsh_token</strong>)
+            value <strong>refrsh_token</strong>.
+            In case of getting access token by using client credentials this parameter value <strong>client_credentials</storng>
           schema:
             type: string
         - name: code
           in: query
-          required: true
+          required: false
           description: |
             The authorization code received in the authorization response.
           schema:
             type: string
         - name: redirect_uri
           in: query
-          required: true
+          required: false
           description: >
             The <strong>redirect_uri</strong> parameter that was included in the
             authorization request as described in Authorization Code Grant Flow
