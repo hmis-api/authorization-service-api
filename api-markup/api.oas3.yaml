@@ -1,12 +1,12 @@
 openapi: 3.0.0
 info:
   title: HMIS Authorization Service
-  version: 1.0.0
+  version: 1.0.1
   description: |
        **Note :**
               Please note that the partial updates are supported via PUT APIs. However, Note that If "null" value is passed for any element, in the PUT request body, it will be ignored. An empty string value should be sent (instead of "null" value) for the elements that need to be updated with NULL values.
 servers:
-  - url: 'https://www.hslynk.com/hmis-authorization-service/rest'
+  - url: 'https://api.hslynk.com/hmis-authorization-service/rest'
 paths:
   /authorize:
     get:
