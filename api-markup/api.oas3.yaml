@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: HMIS Authorization Service
-  version: 1.0.1
+  version: 1.0.3
   description: |
        **Note :**
               Please note that the partial updates are supported via PUT APIs. However, Note that If "null" value is passed for any element, in the PUT request body, it will be ignored. An empty string value should be sent (instead of "null" value) for the elements that need to be updated with NULL values.
@@ -77,13 +77,18 @@ paths:
         - name: response_type
           in: query
           required: true
-          description: >
-            The value must be one ofcode for requesting an authorization
-            <sctrong>code</sctrong> (authorization code grant flow))
-            <sctrong>token</sctrong> for requesting an access token (implicit
-            grant flow),
+          description: |
+            The value must be one of the following:
+            <ul>
+             <li>
+            <strong>code -</strong> for requesting authorization token ( authorization code grant flow)
+            </li>
+            <li>
+            <strong>token -</strong> for requesting an access token (implicit grant flow)
+            </li>
+            </ul>
           schema:
-            type: string
+             type: string
         - name: trustedApp_id
           in: query
           required: true
@@ -133,7 +138,7 @@ paths:
           required: true
           description: >
             Indicates if the user should be re-prompted for consent. The default
-            is <strong>auto<strong>, so a given user should only see the consent
+            is <strong>auto</strong> , so a given user should only see the consent
             page the first time through the sequence. If the value is force,
             then the user sees a consent page even if they have previously given
             consent to the trustedApp.
@@ -161,24 +166,32 @@ paths:
           description: >
             The authorization service responds with an HTTP 400 (Bad Request)
             status code and includes the following parameters with the response
-               <table class="confluenceTable tablesorter">
-                <thead><tr class="sortableHeader">
-                  <th class="confluenceTh sortableHeader" data-column="0"><div class="tablesorter-header-inner"><p> Parameter Name </p></div></th>
-                  <th class="confluenceTh sortableHeader" data-column="1"><div class="tablesorter-header-inner"><p> Description / Parameter Value </p></div></th>
-                  <th class="confluenceTh sortableHeader" data-column="2"><div class="tablesorter-header-inner"><p> Required? </p></div></th>
-                 </tr></thead><tbody>
-
-                 <tr>
-                  <td class="confluenceTd"><p> error </p></td>
-                  <td class="confluenceTd"><p> A single error code from the following: <br class="atl-forced-newline">     <strong>invalid_request</strong> <br class="atl-forced-newline"> The request is missing a required parameter, includes an unsupported parameter value (other than grant type), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the client, or is otherwise malformed. <br class="atl-forced-newline"> <strong>invalid_client</strong> <br class="atl-forced-newline"> Client authentication failed (e.g. unknown client, no client authentication included, or unsupported authentication method). <br class="atl-forced-newline"> <strong>invalid_grant</strong> <br class="atl-forced-newline"> The provided authorization grant (e.g. authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. This error code is also returned if the account is disabled. <br class="atl-forced-newline"> <strong>unauthorized_client</strong> <br class="atl-forced-newline"> The authenticated client is not authorized to use this authorization grant type. <br class="atl-forced-newline"> <strong>unsupported_grant_type</strong> <br class="atl-forced-newline"> The authorization grant type is not supported by the authorization service. <br class="atl-forced-newline"> <strong>server_error</strong> <br class="atl-forced-newline"> The authorization service encountered an unexpected condition which prevented it from fulfilling the request. <br class="atl-forced-newline"> <strong>temporarily_unavailable</strong> <br class="atl-forced-newline"> The authorization service is currently unable to handle the request due to a temporary overloading or maintenance of the server. </p></td>
-                  <td class="confluenceTd"><p> Yes </p></td>
-                 </tr>
-                 <tr>
-                  <td class="confluenceTd"><p> error_description </p></td>
-                  <td class="confluenceTd"><p> A human-readable UTF-8 encoded text providing additional information, used to assist the client developer in understanding the error that occurred. </p></td>
-                  <td class="confluenceTd"><p> No </p></td>
-                 </tr>
-                </tbody></table>
+                                 <ul>
+                      <li>invalid_request
+                        <ul>
+                        TThe request is missing a required parameter, includes an unsupported parameter value (other than grant type), repeats a parameter, includes multiple credentials, utilizes more than one mechanism for authenticating the trustedApp, or is otherwise malformed.
+                        </ul>
+                      </li>
+                      <li>unauthorized_trustedApp
+                        <ul>
+                        The trustedApp authentication failed (e.g. unknown trustedApp, no trustedApp authentication included, or unsupported authentication method). 
+                        </ul>
+                      </li>
+                      <li>invalid_grant 
+                        <ul>
+                        The provided authorization grant (e.g. authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client. This error code is also returned if the account is disabled. 
+                        </ul>
+                      </li>
+                      <li>server_error
+                        <ul>
+                        The authorization service encountered an unexpected condition which prevented it from fulfilling the request.
+                        </ul>
+                      </li>
+                      <li>temporarily_unavailable
+                        <ul>
+                    The authorization service is currently unable to handle the request due to a temporary overloading or maintenance of the server.    </ul>
+                      </li>
+                    </ul>
           content:
             application/json:
               schema:
